@@ -13,8 +13,6 @@ screen.tracer(0)
 snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
-scoreboard.score_board()
-game_over = Scoreboard()
 
 screen.listen()
 screen.onkey(key="Up", fun=snake.turn_upward)
@@ -37,14 +35,14 @@ while not is_game_over:
 
     # Collision with a wall
     if snake.segments[0].xcor() > 290 or snake.segments[0].xcor() < -290 or snake.segments[0].ycor() > 290 or snake.segments[0].ycor() < -290:
-        game_over.game_over()
-        is_game_over = True
+        scoreboard.reset()
+        snake.reset()
 
     # Collision with snake body
     for segment in snake.segments[1:]:
         if snake.segments[0].distance(segment) < 10:
-            game_over.game_over()
-            is_game_over = True
+            scoreboard.reset()
+            snake.reset()
 
 
 screen.exitonclick()
